@@ -1,23 +1,12 @@
 #Ratstsan Nur Akmal Adiwijaya 21120121120019
-#MODUL 1 ada
-#MODUL 2 ada (if)
-#MODUL 3 tidak ada
-#MODUL 4 ada (def)
-#MODUL 5 ada (inheritance)
-#MODUL 6 ada (seter geter)
-#MODUL 7 tidak ada
-#MODUL 8 ada (GUI)
 
-from ctypes import resize
 from tkinter import *
 from tkinter.messagebox import *
 from tkinter.messagebox import showerror
 from abc import ABC
 
-class Processor(ABC):
+class Processor():
     model = None
-    year = None
-    color = None
 
 class Intel(Processor):
 
@@ -43,6 +32,18 @@ class VGA(Processor):
     def getModel(self):
         return self.model
 
+class RAM(Processor):
+
+    def __init__(self,model):
+        self.model = model
+
+    def setModel(self, model):
+        self.model = model
+        pass
+
+    def getModel(self):
+        return self.model
+
 intel = Intel("i5 4590                                    ") #1jt
 intel2 = Intel("AMD Ryzen5 3600                           ") #10jt
 intel3 = Intel("i7 11700                                  ") #100jt
@@ -50,6 +51,10 @@ intel3 = Intel("i7 11700                                  ") #100jt
 vga = VGA("NVIDIA NVS 315                                 ") #1jt
 vga2 = VGA("GeForce GTX1650                               ") #10jt
 vga3 = VGA("GeForce RTX3080                               ") #100jt
+
+ram = RAM("4 GB                                           ") #1jt
+ram2 = RAM("8 GB                                           ") #10jt
+ram3 = RAM("16 GB                                          ") #100jt
 
 def display():
     num = entry.get()
@@ -65,16 +70,22 @@ def display():
             hasil.place(x=100,y=153)
             hasil = Label(window, text= ((vga.getModel())))
             hasil.place(x=100,y=193)
+            hasil = Label(window, text= ((ram.getModel())))
+            hasil.place(x=100,y=233)
         elif 1000000 < num <= 10000000:
             hasil = Label(window, text= ((intel2.getModel())))
             hasil.place(x=100,y=153)
             hasil = Label(window, text= ((vga2.getModel())))
             hasil.place(x=100,y=193)
+            hasil = Label(window, text= ((ram2.getModel())))
+            hasil.place(x=100,y=233)
         elif 10000000 < num <= 100000000:
             hasil = Label(window, text= ((intel3.getModel())))
             hasil.place(x=100,y=153)
             hasil = Label(window, text= ((vga3.getModel())))
             hasil.place(x=100,y=193)
+            hasil = Label(window, text= ((ram3.getModel())))
+            hasil.place(x=100,y=233)
         else:
             showerror('Error', 'Kami belum bisa menemukan PC semahal itu')
             
@@ -111,7 +122,12 @@ labelintel.place(x=10,y=150)
 labelvga = Label(window, 
                     text = "VGA\t:",
                     font = ("times new roman", 12))
-labelvga.place(x=10,y=190)   
+labelvga.place(x=10,y=190)  
+
+labelram = Label(window, 
+                    text = "RAM\t:",
+                    font = ("times new roman", 12))
+labelram.place(x=10,y=230) 
 
 entry = Entry(window)
 entry.pack(pady=5)
